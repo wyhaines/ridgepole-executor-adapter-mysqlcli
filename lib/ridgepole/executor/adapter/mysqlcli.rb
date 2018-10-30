@@ -29,9 +29,9 @@ module Ridgepole
 
         def connectivity_cmdline
           cmd = []
-          cmd << "--socket #{config[:socket]}" if config[:socket]
-          cmd << "--host #{config[:host]}" if config[:host]
-          cmd << "--port #{config[:port]}" if config[:port]
+          %i[socket host port].each do |x|
+            cmd << "--#{x} #{config[x]}" if config[x]
+          end
           cmd
         end
 

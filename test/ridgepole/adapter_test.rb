@@ -79,12 +79,16 @@ class Ridgepole::Executor::Adapter::MysqlCliTest < Minitest::Test
   end
   # rubocop: enable Metrics/AbcSize
 
-  def test_generate_mysql_command_line
-    _setup_argv(:tcp)
+  def _setup_adapter
     adapter = Ridgepole::Executor::Adapter::MysqlCli.new
     config, metaconfig = _setup_dummy_config
     adapter.parse(config, metaconfig)
-    assert adapter.mysql_cmdline.join(' ') == [
+    adapter
+  end
+
+  def test_generate_mysql_command_line
+    _setup_argv(:tcp)
+    assert _setup_adapter.mysql_cmdline.join(' ') == [
       'mysql',
       '--user', TESTUSER,
       '--password', TESTPASSWORD,
@@ -96,11 +100,8 @@ class Ridgepole::Executor::Adapter::MysqlCliTest < Minitest::Test
 
   def test_run_sql
     _setup_sink_as_command
-    adapter = Ridgepole::Executor::Adapter::MysqlCli.new
-    config, metaconfig = _setup_dummy_config
-    adapter.parse(config, metaconfig)
     sql = "select 1 from #{TESTDATABASE}\n"
-    result = adapter.do(sql)
+    result = _setup_adapter.do(sql)
     assert result == sql
   end
 end

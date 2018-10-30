@@ -1,9 +1,8 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 require 'timeout'
 
-Timeout::timeout(5) do
-  unless STDIN.tty?
-    puts STDIN.read
-  end
+Timeout.timeout(2) do
+  puts STDIN.read unless STDIN.tty?
 end
