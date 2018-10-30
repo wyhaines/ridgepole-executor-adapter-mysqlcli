@@ -58,19 +58,19 @@ module Ridgepole
 
           def _setup_helptext
             @metaconfig[:helptext] << <<~EHELP
-              -b, --bind:
+              -b, --bind HOST[:PORT]|PATH :
                 The host/port or the socket to connect to to access the database.
 
-              -c, --command:
+              -c, --command COMMAND:
                 The command to invoke. This defaults to #{DEFAULT_CMD}.
 
-              -d, --database:
+              -d, --database DBNAME:
                 The name of the database to access.
 
-              -p, --password:
+              -p, --password PASSWORD:
                 The password to use to log into the database.
 
-              -u, --user:
+              -u, --user USER:
                 The user name to use to log into the database.
             EHELP
           end
