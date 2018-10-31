@@ -72,6 +72,7 @@ module Ridgepole
 
               -u, --user USER:
                 The user name to use to log into the database.
+
             EHELP
           end
 
