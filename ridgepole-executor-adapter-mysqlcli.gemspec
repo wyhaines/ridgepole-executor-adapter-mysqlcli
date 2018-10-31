@@ -6,7 +6,7 @@ require 'ridgepole/executor/adapter/mysqlcli/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'ridgepole-executor-adapter-mysqlcli'
-  spec.version       = Ridgepole::Executor::Adapter::MysqlCli::VERSION
+  spec.version       = Ridgepole::Executor::Adapter::Mysqlcli::VERSION
   spec.authors       = ['Kirk Haines']
   spec.email         = ['kirk-haines@cookpad.com']
 

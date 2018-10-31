@@ -5,7 +5,7 @@ require 'english'
 
 # rubocop: disable Style/ClassAndModuleChildren
 # Test the Executor
-class Ridgepole::Executor::Adapter::MysqlCliTest < Minitest::Test
+class Ridgepole::Executor::Adapter::MysqlcliTest < Minitest::Test
   TESTUSER = 'testuser'
   TESTPASSWORD = 'testpassword'
   TESTHOST = '127.0.0.1'
@@ -14,7 +14,7 @@ class Ridgepole::Executor::Adapter::MysqlCliTest < Minitest::Test
   TESTDATABASE = 'testdatabase'
 
   def test_that_it_has_a_version_number
-    refute_nil ::Ridgepole::Executor::Adapter::MysqlCli::VERSION
+    refute_nil ::Ridgepole::Executor::Adapter::Mysqlcli::VERSION
   end
 
   def setup
@@ -51,7 +51,7 @@ class Ridgepole::Executor::Adapter::MysqlCliTest < Minitest::Test
 
   def _setup_test_cli_parser(set = :tcp)
     _setup_argv(set)
-    cli = Ridgepole::Executor::Adapter::MysqlCli::Cli.new
+    cli = Ridgepole::Executor::Adapter::Mysqlcli::Cli.new
     config, metaconfig = _setup_dummy_config
     cli.parse(config, metaconfig)
     cli
@@ -80,7 +80,7 @@ class Ridgepole::Executor::Adapter::MysqlCliTest < Minitest::Test
   # rubocop: enable Metrics/AbcSize
 
   def _setup_adapter
-    adapter = Ridgepole::Executor::Adapter::MysqlCli.new
+    adapter = Ridgepole::Executor::Adapter::Mysqlcli.new
     config, metaconfig = _setup_dummy_config
     adapter.parse(config, metaconfig)
     adapter

@@ -7,7 +7,7 @@ require 'ridgepole/executor/config'
 module Ridgepole
   class Executor
     class Adapter
-      class MysqlCli
+      class Mysqlcli
         # Parse command line arguments for this CLI.
         class Cli
           Task = Swiftcore::Tasks::Task

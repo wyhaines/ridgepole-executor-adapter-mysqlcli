@@ -6,7 +6,7 @@ module Ridgepole
   class Executor
     class Adapter
       # Adapter to run nonblocking SQL commands through the `mysql` CLI.
-      class MysqlCli
+      class Mysqlcli
         def initialize
           @cli = Cli.new
         end

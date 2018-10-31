@@ -1,4 +1,4 @@
-# Ridgepole::Executor::Adapters::MysqlCli
+# Ridgepole::Executor::Adapters::Mysqlcli
 
 This is an adapter for Ridgepole::Executor to run non-blocking SQL via the
 MySQL CLI.

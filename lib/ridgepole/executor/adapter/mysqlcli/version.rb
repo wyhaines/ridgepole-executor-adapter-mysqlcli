@@ -3,7 +3,7 @@
 module Ridgepole
   class Executor
     class Adapter
-      class MysqlCli
+      class Mysqlcli
         VERSION = '0.1.0'
       end
     end
