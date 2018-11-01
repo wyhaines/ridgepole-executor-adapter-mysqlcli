@@ -45,9 +45,9 @@ module Ridgepole
           ]
         end
 
-        def do(sql)
+        def do
           IO.popen(mysql_cmdline, 'w+') do |io|
-            io.puts sql
+            io.puts config[:sql]
             io.close_write
             io.read
           end

@@ -101,7 +101,9 @@ class Ridgepole::Executor::Adapter::MysqlcliTest < Minitest::Test
   def test_run_sql
     _setup_sink_as_command
     sql = "select 1 from #{TESTDATABASE}\n"
-    result = _setup_adapter.do(sql)
+    adapter = _setup_adapter
+    adapter.config[:sql] = sql
+    result = adapter.do
     assert result == sql
   end
 end

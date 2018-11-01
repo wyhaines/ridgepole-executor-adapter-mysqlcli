@@ -15,9 +15,6 @@ module Ridgepole
           attr_reader :config, :metaconfig
 
           def initialize
-            @config = Config.new
-            @config[:command] = DEFAULT_CMD
-            @metaconfig = Config.new
           end
 
           def _opt_bind(opts, call_list)
@@ -100,8 +97,9 @@ module Ridgepole
           end
 
           def parse(config, metaconfig)
-            @config.merge!(config)
-            @metaconfig.merge!(metaconfig)
+            @config = config
+            @config[:command] ||= DEFAULT_CMD
+            @metaconfig = metaconfig
             call_list = Swiftcore::Tasks::TaskList.new
             _setup_helptext
 
