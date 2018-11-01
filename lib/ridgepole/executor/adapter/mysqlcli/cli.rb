@@ -14,9 +14,6 @@ module Ridgepole
           DEFAULT_CMD = 'mysql'
           attr_reader :config, :metaconfig
 
-          def initialize
-          end
-
           def _opt_bind(opts, call_list)
             opts.on('-b', '--bind HOST[:PORT}|PATH') do |bind|
               call_list << Task.new(9000) do
