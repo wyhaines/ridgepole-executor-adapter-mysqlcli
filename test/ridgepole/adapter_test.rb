@@ -86,9 +86,8 @@ class Ridgepole::Executor::Adapter::MysqlcliTest < Minitest::Test
     adapter
   end
 
-  def test_generate_mysql_command_line
-    _setup_argv(:tcp)
-    assert _setup_adapter.mysql_cmdline.join(' ') == [
+  def _expected_command_line
+    [
       'mysql',
       '--user', TESTUSER,
       '--password', TESTPASSWORD,
@@ -96,6 +95,13 @@ class Ridgepole::Executor::Adapter::MysqlcliTest < Minitest::Test
       '--port', TESTPORT,
       TESTDATABASE
     ].join(' ')
+  end
+
+  def test_generate_mysql_command_line
+    _setup_argv(:tcp)
+    a = _setup_adapter.mysql_cmdline.join(' ')
+    b = _expected_command_line
+    assert a == b
   end
 
   def test_run_sql

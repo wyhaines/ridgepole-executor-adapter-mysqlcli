@@ -19,17 +19,26 @@ module Ridgepole
           @cli.config
         end
 
+        def dry_run?
+          # Use known migrator dry run flags to determine if the adapter should
+          # be dry-run too. This should probably use an API in the migrator
+          # class....
+          ENV['PTOSC_OTHER_FLAGS'] =~ /--dry-run/
+        end
+
         def user_cmdline
-          ['--user', config[:user]] if config[:user]
+          return unless config['user'] || config['username']
+
+          ['--user', config['user'] || config['username']]
         end
 
         def password_cmdline
-          ['--password', config[:password]] if config[:password]
+          ['--password', config['password']] if config['password']
         end
 
         def connectivity_cmdline
           cmd = []
-          %i[socket host port].each do |x|
+          %w[socket host port].each do |x|
             cmd << "--#{x} #{config[x]}" if config[x]
           end
           cmd
@@ -41,15 +50,19 @@ module Ridgepole
             *user_cmdline,
             *password_cmdline,
             *connectivity_cmdline,
-            config[:database]
+            config['database']
           ]
         end
 
         def do
-          IO.popen(mysql_cmdline, 'w+') do |io|
-            io.puts config[:sql]
-            io.close_write
-            io.read
+          if dry_run?
+            puts "#{mysql_cmdline.join(' ')}\n  \\. #{config[:sql]}"
+          else
+            IO.popen(mysql_cmdline, 'w+') do |io|
+              io.puts config[:sql]
+              io.close_write
+              io.read
+            end
           end
         end
       end
